@@ -78,3 +78,27 @@ async def root():
         }
     }
 
+@app.get("/health")
+async def health_check():
+    """Health check endpoint"""
+    api_key_present = bool(os.getenv("GROQ_API_KEY"))
+    
+    status = {
+        "status": "healthy" if api_key_present else "unhealthy",
+        "api_configured": api_key_present,
+        "service": "groq",
+        "model": "llama-3.3-70b-versatile"
+    }
+    
+    if not api_key_present:
+        status["message"] = "GROQ_API_KEY environment variable is not set"
+    else:
+        status["message"] = "API is ready"
+    
+    return status
+
+
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.getenv("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
