@@ -184,7 +184,7 @@ export default function Page() {
                         Resume Analyzer
                     </h1>
                     <p className="text-lg sm:text-xl text-gray-600 mb-4 px-4">
-                        AI-powered resume feedback • Powered by Groq • 100% Free
+                        AI-powered resume feedback 
                     </p>
 
                     {/* API Status Badge */}
